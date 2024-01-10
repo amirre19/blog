@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title_block  %}
+            Base Title
+        {% endblock title_block  %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'phone_auth/css/style.css' %}">
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <h1>Hello {{ user.username }}</h1> | <a href="{% url 'phone_auth:phone_logout' %}">logout</a>
+    {% else %}
+        <a href="{% url 'phone_auth:phone_login' %}">login</a> | <a href="{% url 'phone_auth:phone_signup' %}">sign up</a>
+    {% endif %}
+    
+    {% block content  %}
+        <!-- Base body -->
+    {% endblock content  %}
+</body>
+</html>
